@@ -65,7 +65,7 @@ jobs:
         run: |
           mkdir -p ghidraProjects
           chmod +x ./ghidra/support/pyghidraRun
-          yes | ./ghidra/support/pyghidraRun --headless ghidraProjects ba -Xmx4G -XX:ParallelGCThreads=2 -XX:CICompilerCount=2 -import libil2cpp.so -noanalysis -deleteProject -scriptPath ./ghidraScripts -preScript parse_il2cpp.py -postScript ExportTypeConversion.java
+          yes | ./ghidra/support/pyghidraRun --headless ghidraProjects ba -Xmx4G -XX:ParallelGCThreads=2 -XX:CICompilerCount=2 -import libil2cpp.so -noanalysis -deleteProject -scriptPath ./ghidraScripts -preScript parse_il2cpp.py -postScript ExportTypeConversionGlobal.java
       
       - name: Generate JSON
         run: |
