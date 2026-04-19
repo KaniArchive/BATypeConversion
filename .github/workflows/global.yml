@@ -75,14 +75,20 @@ jobs:
       - name: Upload to branch global
         run: |
           git fetch origin
-          git add TypeConversion.c ProtocolConversionData.json
-          git commit -m "Prepare new TypeConversion.c and JSON"
+          
+          cp TypeConversion.c /tmp/TypeConversion.c
+          cp ProtocolConversionData.json /tmp/ProtocolConversionData.json || true
+          
+          git add TypeConversion.c ProtocolConversionData.json || true
+          git commit -m "Prepare new TypeConversion.c and JSON" || true
           
           VERSION_NAME=$(jq -r '.version_name' manifest.json)
           
           git checkout -f global
           
-          git checkout main -- TypeConversion.c ProtocolConversionData.json
+          cp /tmp/TypeConversion.c .
+          cp /tmp/ProtocolConversionData.json . || true
+          
           git add TypeConversion.c ProtocolConversionData.json
           if ! git diff --cached --quiet; then
             git commit -m "$VERSION_NAME"
